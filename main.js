@@ -5,24 +5,28 @@ var selection = false
 var turnCount = 0;
 var turn = 'white';
 var ball = new figure("ball", "black", 4, 5);
-var whiteKeeper = new figure("pawn", "white", 3, 8);
-var blackKeeper = new figure("pawn", "black", 5, 2);
-var strikerOneWhite = new figure("king", "white", 2, 8);
-var strikerOneBlack = new figure("king", "black", 6, 2);
-var strikerTwoWhite = new figure("king", "white", 6, 8);
-var strikerTwoBlack = new figure("king", "black", 2, 2);
+var whiteKeeper = new figure("pawn", "white", 4, 9);
+var blackKeeper = new figure("pawn", "black", 4, 1);
+var strikerOneWhite = new figure("king", "white", 5, 7);
+var strikerOneBlack = new figure("king", "black", 5, 3);
+var strikerTwoWhite = new figure("king", "white", 3, 7);
+var strikerTwoBlack = new figure("king", "black", 3, 3);
 var strikerThreeWhite = new figure("king", "white", 4, 7);
 var strikerThreeBlack = new figure("king", "black", 4, 3);
 var gameObjects = [whiteKeeper , blackKeeper, strikerOneWhite, strikerOneBlack, strikerTwoWhite, strikerTwoBlack, strikerThreeWhite, strikerThreeBlack]
 var boardSizex = 679;
 var boardSizey = 835;
 var boardStep = 75;
+var whitescore = 0;
+var blackscore = 0;
 
 //draw the board and listen for mouse events
 function drawBoard() {
 
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
+
+
 
     //set up goal, keeper box, boundary
   if(!selection){
@@ -70,6 +74,21 @@ function drawBoard() {
     for(i = 0; i<gameObjects.length;i++){
       renderFigure(gameObjects[i]);
     }
+
+    //score
+    context.fillStyle = "rgb(250, 50, 50)";
+    context.font = "24px Helvetica";
+    context.textAlign = "left";
+    context.textBaseline = "top";
+    context.fillText("white score:"+ whitescore , 5, 0);
+
+    context.fillStyle = "rgb(250, 50, 50)";
+    context.font = "24px Helvetica";
+    context.textAlign = "left";
+    context.textBaseline = "top";
+    context.fillText("black score:"+ blackscore , 5, 40);
+
+
     canvas.addEventListener("click", canvasClick, false);
 }
 
@@ -82,7 +101,7 @@ function canvasClick(e) {
     for(i = 0; i < gameObjects.length; i++){
     //see if you have ball and object selected
       if(gameObjects[i].selected && ball.selected){
-        if(cell.row > 0 && cell.row < 10){
+        if((cell.row > 0 || (cell.column < 6 && cell.column > 2 ))&&(cell.row < 10 || (cell.column < 6 && cell.column > 2))){
           //deslect if you click the figure
           if(gameObjects[i].row === cell.row && gameObjects[i].column === cell.column){
             gameObjects[i].selected = false
@@ -200,6 +219,8 @@ function figure(type, color, column, row) {
     this.row = row;
     this.color = color;
     this.selected = false;
+    this.startRow = row;
+    this.startColumn = column;
 
   }
 function renderFigure(figure) {
@@ -294,6 +315,10 @@ function ballMovement(cell, figure){
   if(ball.column === figure.column){
     console.log("in column loop")
     if (ball.row > figure.row){
+      var defaultRow = 9
+      if(ball.column > 2 && ball.column < 6){
+        defaultRow = 10
+      }
       var testCase = undefined
       var result = undefined
       for(var i =0; i<gameObjects.length; i++){
@@ -306,8 +331,12 @@ function ballMovement(cell, figure){
             result = testCase
           }
         }
-      }ball.row = result || 9
+      }ball.row = result || defaultRow
     }else{
+      var defaultRow = 1
+      if(ball.column > 2 && ball.column < 6){
+        defaultRow = 0
+      }
       var testCase = undefined
       var result = undefined
       for(var i =0; i<gameObjects.length; i++){
@@ -320,12 +349,12 @@ function ballMovement(cell, figure){
             result = testCase
           }
         }
-      }ball.row = result || 1
+      }ball.row = result || defaultRow
     }
   }
   //handle diagonal less less
   if((ball.column < figure.column)&&(ball.row < figure.row)){
-      while(ball.column > 0 && ball.row > 1){
+      while(ball.column > 0 && (ball.row > 1 || (ball.row === 1 && (ball.column < 7 && ball.column > 3)))){
         trigger = false
         ball.column--;
         ball.row--;
@@ -341,7 +370,7 @@ function ballMovement(cell, figure){
   }
   //handle diagonal more more
   if((ball.column > figure.column)&&(ball.row > figure.row)){
-      while(ball.column < 8 && ball.row < 9){
+      while(ball.column < 8 && (ball.row < 9 || (ball.row === 9 && (ball.column < 5 && ball.column > 1)))){
         trigger = false
         ball.column++;
         ball.row++;
@@ -357,7 +386,7 @@ function ballMovement(cell, figure){
   }
   //handle diagonal less more
   if((ball.column > figure.column)&&(ball.row < figure.row)){
-      while(ball.column < 8 && ball.row > 1){
+      while(ball.column < 8 && (ball.row > 1 || (ball.row === 1 && (ball.column < 5 && ball.column > 1)))){
         trigger = false
         ball.column++;
         ball.row--;
@@ -373,7 +402,7 @@ function ballMovement(cell, figure){
   }
   //handle diagonal more less
   if((ball.column < figure.column)&&(ball.row > figure.row)){
-      while(ball.column > 0 && ball.row < 9){
+      while(ball.column > 0 && (ball.row < 9 || (ball.row === 9 && (ball.column < 7 && ball.column > 3)))){
         trigger = false
         ball.column--;
         ball.row++;
@@ -387,12 +416,20 @@ function ballMovement(cell, figure){
 
       }
   }
-
-
-
-
-
-
+  //if black scores
+  if(ball.row === 10){
+    blackscore += 1;
+    turnCount = 0;
+    turn = 'white';
+    resetBoard();
+  }
+  //if white scores
+  if(ball.row === 0){
+    whitescore += 1;
+    turn = 'black';
+    turnCount = 0;
+    resetBoard();
+  }
   figure.selected = false
   ball.selected = false
   selection = false
@@ -407,4 +444,12 @@ function ballMovement(cell, figure){
   //   }else {turn = 'white'}
   // }
   return
+}
+function resetBoard(){
+  for(var i = 0; i < gameObjects.length; i++){
+    gameObjects[i].row = gameObjects[i].startRow;
+    gameObjects[i].column = gameObjects[i].startColumn;
+  }
+    ball.row = ball.startRow;
+    ball.column = ball.startColumn;
 }
