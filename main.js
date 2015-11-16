@@ -82,7 +82,8 @@ function canvasClick(e) {
     for(i = 0; i < gameObjects.length; i++){
     //see if you have ball and object selected
       if(gameObjects[i].selected && ball.selected){
-        if(cell.row > 0 && cell.column < 10){
+        if(cell.row > 0 && cell.row < 10){
+          //deslect if you click the figure
           if(gameObjects[i].row === cell.row && gameObjects[i].column === cell.column){
             gameObjects[i].selected = false
             selection = false
@@ -91,7 +92,21 @@ function canvasClick(e) {
             drawBoard();
             return
           }
-        ballMovement(cell, gameObjects[i]);
+          if(Math.abs(gameObjects[i].row - cell.row) <=1 && Math.abs(gameObjects[i].column - cell.column) <= 1){
+            var kicker = gameObjects[i]
+            var i = 0
+            var trigger = false
+            while( i < gameObjects.length){
+              if(gameObjects[i].row === cell.row && gameObjects[i].column === cell.column){
+                trigger = true
+                break
+              }
+              i++
+            }
+            if(!trigger){
+              ballMovement(cell, kicker)
+            }
+          }
       }
         return
 
