@@ -4,7 +4,7 @@ $(document).ready(function(){
 var selection = false
 var turnCount = 0;
 var turn = 'white';
-var ball = "hold"
+var ball = new figure("ball", "black", 4, 5);
 var whiteKeeper = new figure("pawn", "white", 3, 8);
 var blackKeeper = new figure("pawn", "black", 5, 2);
 var strikerOneWhite = new figure("king", "white", 2, 8);
@@ -14,7 +14,6 @@ var strikerTwoBlack = new figure("king", "black", 2, 2);
 var strikerThreeWhite = new figure("king", "white", 4, 7);
 var strikerThreeBlack = new figure("king", "black", 4, 3);
 var gameObjects = [whiteKeeper , blackKeeper, strikerOneWhite, strikerOneBlack, strikerTwoWhite, strikerTwoBlack, strikerThreeWhite, strikerThreeBlack]
-console.log(gameObjects);
 var boardSizex = 679;
 var boardSizey = 835;
 var boardStep = 75;
@@ -67,7 +66,7 @@ function drawBoard() {
 
     context.strokeStyle = "#eee";
     context.stroke();
-
+    renderFigure(ball)
     for(i = 0; i<gameObjects.length;i++){
       renderFigure(gameObjects[i]);
     }
@@ -78,11 +77,28 @@ function drawBoard() {
 function canvasClick(e) {
     //get location and set it in grid
     var cell = getCursorPosition(e);
-    console.log(cell);
+
     //see if you have and selected objects to move
     for(i = 0; i < gameObjects.length; i++){
+    //see if you have ball and object selected
+      if(gameObjects[i].selected && ball.selected){
+        if(cell.row > 0 && cell.column < 10){
+          if(gameObjects[i].row === cell.row && gameObjects[i].column === cell.column){
+            gameObjects[i].selected = false
+            selection = false
+            ball.selected = false
+            console.log("deselected");
+            drawBoard();
+            return
+          }
+        ballMovement(cell, gameObjects[i]);
+      }
+        return
+
+      }
+      //
       if(gameObjects[i].selected){
-        // validate that the object can move where you click
+        // deselect if you reclick the selected game piece
         if(gameObjects[i].row === cell.row && gameObjects[i].column === cell.column){
           gameObjects[i].selected = false
           selection = false
@@ -90,6 +106,14 @@ function canvasClick(e) {
           drawBoard();
           return
         }
+        //see if second click toched ball
+        if((cell.row === ball.row && ball.column === cell.column)&&(Math.abs(ball.row-gameObjects[i].row) <2 && Math.abs(ball.column-gameObjects[i].column)<2)){
+          colorSquare(cell.row, cell.column, "red")
+          ball.selected = true
+          drawBoard()
+          return
+        }
+        // validate the move
         if(validateMove(gameObjects[i], cell)){
         gameObjects[i].row = cell.row
         gameObjects[i].column = cell.column
@@ -213,4 +237,159 @@ function validateMove(figure, cell){
     }
   }return false
 
+}
+function ballMovement(cell, figure){
+  ball.row = cell.row
+  ball.column = cell.column
+  //handle if row is the same
+  if(ball.row === figure.row){
+    console.log('in row loop')
+    if(ball.column > figure.column){
+      var testCase = undefined
+      var result = undefined
+      for(var i =0; i<gameObjects.length; i++){
+        if((gameObjects[i].row === ball.row)&&(gameObjects[i].column > ball.column)){
+          testCase = gameObjects[i].column - 1
+          if(!result){
+            result = testCase
+          }
+          else if(testCase < result){
+            result = testCase
+          }
+        }
+      }
+    ball.column = result || 8
+    }else{
+      var testCase = undefined
+      var result = undefined
+      for(var i =0; i<gameObjects.length; i++){
+        if((gameObjects[i].row === ball.row)&&(gameObjects[i].column < ball.column)){
+          testCase = gameObjects[i].column + 1
+          if(!result){
+            result = testCase
+          }
+          else if(testCase > result){
+            result = testCase
+          }
+        }
+      }ball.column = result || 0
+    }
+  }
+  //handle if column is the same
+  if(ball.column === figure.column){
+    console.log("in column loop")
+    if (ball.row > figure.row){
+      var testCase = undefined
+      var result = undefined
+      for(var i =0; i<gameObjects.length; i++){
+        if((gameObjects[i].column === ball.column)&&(gameObjects[i].row > ball.row)){
+          testCase = gameObjects[i].row - 1
+          if(!result){
+            result = testCase
+          }
+          else if(testCase < result){
+            result = testCase
+          }
+        }
+      }ball.row = result || 9
+    }else{
+      var testCase = undefined
+      var result = undefined
+      for(var i =0; i<gameObjects.length; i++){
+        if((gameObjects[i].column === ball.column)&&(gameObjects[i].row < ball.row)){
+          testCase = gameObjects[i].row + 1
+          if(!result){
+            result = testCase
+          }
+          else if(testCase > result){
+            result = testCase
+          }
+        }
+      }ball.row = result || 1
+    }
+  }
+  //handle diagonal less less
+  if((ball.column < figure.column)&&(ball.row < figure.row)){
+      while(ball.column > 0 && ball.row > 1){
+        trigger = false
+        ball.column--;
+        ball.row--;
+        for(var i =0; i<gameObjects.length; i++){
+          if((ball.row===gameObjects[i].row)&&(ball.column===gameObjects[i].column)){
+            trigger = true
+            ball.column++;
+            ball.row++;
+          }
+        }if(trigger){break};
+
+      }
+  }
+  //handle diagonal more more
+  if((ball.column > figure.column)&&(ball.row > figure.row)){
+      while(ball.column < 8 && ball.row < 9){
+        trigger = false
+        ball.column++;
+        ball.row++;
+        for(var i =0; i<gameObjects.length; i++){
+          if((ball.row===gameObjects[i].row)&&(ball.column===gameObjects[i].column)){
+            trigger = true
+            ball.column--;
+            ball.row--;
+          }
+        }if(trigger){break};
+
+      }
+  }
+  //handle diagonal less more
+  if((ball.column > figure.column)&&(ball.row < figure.row)){
+      while(ball.column < 8 && ball.row > 1){
+        trigger = false
+        ball.column++;
+        ball.row--;
+        for(var i =0; i<gameObjects.length; i++){
+          if((ball.row===gameObjects[i].row)&&(ball.column===gameObjects[i].column)){
+            trigger = true
+            ball.column--;
+            ball.row++;
+          }
+        }if(trigger){break};
+
+      }
+  }
+  //handle diagonal more less
+  if((ball.column < figure.column)&&(ball.row > figure.row)){
+      while(ball.column > 0 && ball.row < 9){
+        trigger = false
+        ball.column--;
+        ball.row++;
+        for(var i =0; i<gameObjects.length; i++){
+          if((ball.row===gameObjects[i].row)&&(ball.column===gameObjects[i].column)){
+            trigger = true
+            ball.column++;
+            ball.row--;
+          }
+        }if(trigger){break};
+
+      }
+  }
+
+
+
+
+
+
+  figure.selected = false
+  ball.selected = false
+  selection = false
+  drawBoard();
+  // turnCount++
+  // console.log(turnCount)
+  // if(turnCount === 3){
+  //   turnCount = 0;
+  //   console.log('end of turn');
+  //   if(turn === 'white'){
+  //     turn = 'black'
+  //   }else {turn = 'white'}
+  // }
+  return
 }
