@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Chessboard Soccer</title>
-    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script> -->
-    <script type="text/javascript" src = jquery-2.1.4.js></script>
-  </head>
-  <body>
-    <canvas width='680' height="830" id="canvas"></canvas>
-    <script type="text/javascript" src="main.js">
+<head>
+  <meta charset="utf-8">
+  <title>Chessboard Soccer</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
 
-    </script>
-  </body>
+
+</head>
+<body>
+  <main>
+  <div class="player">
+    <img class="player1"></img>
+    <h1></h1>
+    <button type="button" class="get-player">Get A Player</button>
+  </div>
+  <canvas width='680' height="830" id="canvas"></canvas>
+  <div class="player">
+    <img class="player2"></img>
+    <button type="button" class="get-player">Get A Player</button>
+  </div>
+</main>
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="api.js"></script>
+</body>
 </html>

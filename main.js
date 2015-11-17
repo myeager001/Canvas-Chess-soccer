@@ -109,6 +109,7 @@ function canvasClick(e) {
             ball.selected = false
             console.log("deselected");
             drawBoard();
+            
             return
           }
           if(Math.abs(gameObjects[i].row - cell.row) <=1 && Math.abs(gameObjects[i].column - cell.column) <= 1){
