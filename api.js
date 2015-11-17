@@ -4,10 +4,11 @@ $(document).ready(function(){
       userObject = JSON.parse(localStorage.getItem('user'))
     });
     $(this).prevAll('img').attr('src', userObject.picture.thumbnail)
-    $(this).prev('h1')
+    $(this).prevAll('.name')
     .text(userObject.name.title.toUpperCase()+
     " "+userObject.name.first.toUpperCase()+
-    " "+userObject.name.last.toUpperCase())
+    " "+userObject.name.last.toUpperCase());
+    $(this).prevAll('.username').text(userObject.username)
 
   });
 });

@@ -9,10 +9,20 @@ img{
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 0, 0);
+  justify-content: space-around;
+  align-items: center;
   width: 25%
 }
 main{
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+header{
+  display: flex;
+  background-color: black;
+  height: 4vw;
+}
+body{
+  margin: 0;
 }
