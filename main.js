@@ -4,14 +4,15 @@ $(document).ready(function(){
 $('.reset').on('click',function(){
   resetBoard();
   selection = false
-  turnCount = 0;
+  turnCount = 3;
   turn = 'white';
   whitescore = 0;
   blackscore = 0;
   drawBoard();
 })
 var selection = false
-var turnCount = 0;
+var turnCount = 3;
+var kickCount = 3;
 var turn = 'white';
 var ball = new figure("ball", "black", 4, 5);
 var whiteKeeper = new figure("pawn", "white", 4, 9);
@@ -89,13 +90,13 @@ function drawBoard() {
     context.font = "24px Helvetica";
     context.textAlign = "left";
     context.textBaseline = "top";
-    context.fillText("white score:"+ whitescore , 5, 0);
+    context.fillText("moves left: "+ turnCount , 5, 0);
 
     context.fillStyle = "rgb(250, 50, 50)";
     context.font = "24px Helvetica";
     context.textAlign = "left";
     context.textBaseline = "top";
-    context.fillText("black score:"+ blackscore , 5, 40);
+    context.fillText("kicks left: "+ kickCount , 5, 40);
 
     $('#black-score').text("Score: "+ blackscore);
     $('#white-score').text("Score: "+ whitescore);
@@ -165,19 +166,15 @@ function canvasClick(e) {
         gameObjects[i].column = cell.column
         gameObjects[i].selected = false
         selection = false
-        drawBoard();
-        turnCount++
-        console.log(turnCount)
-        if(turnCount === 3){
-          turnCount = 0;
-          console.log('end of turn');
-          $('.player').toggleClass('active')
-          if(turn === 'white'){
-            turn = 'black'
-          }else {turn = 'white'}
-          drawBoard();
+        if(gameObjects[i].type === "king"){
+        turnCount--
         }
-        return
+        drawBoard();
+        console.log(turnCount)
+        if(turnCount === 0){
+          endTurn();
+
+        }
       }return
     }
     }
@@ -196,6 +193,17 @@ function canvasClick(e) {
 
     drawBoard();
 }
+function endTurn(){
+  turnCount = 3;
+  kickCount = 3
+  console.log('end of turn');
+  $('.player').toggleClass('active')
+  if(turn === 'white'){
+    turn = 'black'
+  }else {turn = 'white'}
+  drawBoard();
+}
+
 //set to grid system
 function getCursorPosition(e) {
     var x;
@@ -430,10 +438,15 @@ function ballMovement(cell, figure){
 
       }
   }
+  kickCount--
+  if(kickCount === 0){
+    endTurn();
+  }
   //if black scores
   if(ball.row === 10){
     blackscore += 1;
-    turnCount = 0;
+    turnCount = 3;
+    kickCount = 3;
     turn = 'white';
     $('.player').toggleClass('active')
     resetBoard();
@@ -442,7 +455,8 @@ function ballMovement(cell, figure){
   if(ball.row === 0){
     whitescore += 1;
     turn = 'black';
-    turnCount = 0;
+    turnCount = 3;
+    kickCount = 3;
     $('.player').toggleClass('active')
     resetBoard();
   }
