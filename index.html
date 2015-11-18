@@ -24,16 +24,19 @@
   <main>
   <div class="player">
     <h1>Black</h1>
-    <h2>Score: 0</h2>
+    <h2 id="black-score">Score: 0</h2>
     <img class="player1"></img>
     <h1 class="name"></h1>
     <h2 class="username"></h2>
     <button type="button" class="get-player">Get A Player</button>
   </div>
+  <div class="canvas-wraper">
   <canvas width='680' height="830" id="canvas"></canvas>
-  <div class="player">
+  <button type="button" class="reset">Reset Game</button>
+  </div>
+  <div class="player active">
     <h1>White</h2>
-    <h2>Score: 0</h2>
+    <h2 id="white-score">Score: 0</h2>
     <img class="player2"></img>
     <h1 class="name"></h1>
     <h2 class="username"></h2>

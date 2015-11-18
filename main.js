@@ -1,6 +1,15 @@
 $(document).ready(function(){
   drawBoard();
 })
+$('.reset').on('click',function(){
+  resetBoard();
+  selection = false
+  turnCount = 0;
+  turn = 'white';
+  whitescore = 0;
+  blackscore = 0;
+  drawBoard();
+})
 var selection = false
 var turnCount = 0;
 var turn = 'white';
@@ -88,6 +97,8 @@ function drawBoard() {
     context.textBaseline = "top";
     context.fillText("black score:"+ blackscore , 5, 40);
 
+    $('#black-score').text("Score: "+ blackscore);
+    $('#white-score').text("Score: "+ whitescore);
 
     canvas.addEventListener("click", canvasClick, false);
 }
@@ -109,7 +120,7 @@ function canvasClick(e) {
             ball.selected = false
             console.log("deselected");
             drawBoard();
-            
+
             return
           }
           if(Math.abs(gameObjects[i].row - cell.row) <=1 && Math.abs(gameObjects[i].column - cell.column) <= 1){
@@ -160,9 +171,11 @@ function canvasClick(e) {
         if(turnCount === 3){
           turnCount = 0;
           console.log('end of turn');
+          $('.player').toggleClass('active')
           if(turn === 'white'){
             turn = 'black'
           }else {turn = 'white'}
+          drawBoard();
         }
         return
       }return
@@ -435,15 +448,6 @@ function ballMovement(cell, figure){
   ball.selected = false
   selection = false
   drawBoard();
-  // turnCount++
-  // console.log(turnCount)
-  // if(turnCount === 3){
-  //   turnCount = 0;
-  //   console.log('end of turn');
-  //   if(turn === 'white'){
-  //     turn = 'black'
-  //   }else {turn = 'white'}
-  // }
   return
 }
 function resetBoard(){
