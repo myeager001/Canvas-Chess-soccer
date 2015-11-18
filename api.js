@@ -1,8 +1,24 @@
 $(document).ready(function(){
+//load users from local storage
+loadUser('userone');
+loadUser('usertwo')
+function loadUser(user){
+  var result = JSON. parse(localStorage.getItem(user))
+  var button = document.getElementById(user)
+  $(button).prevAll('img').attr('src', result.picture.thumbnail)
+  $(button).prevAll('.name')
+  .text(result.name.title.toUpperCase()+
+  " "+result.name.first.toUpperCase()+
+  " "+result.name.last.toUpperCase());
+  $(button).prevAll('.username').text(result.username)
 
+}
+
+//button response to getting a new player
   $(".get-player").on('click',function(){
-    $.when(getUser()).then(function(){
-      userObject = JSON.parse(localStorage.getItem('user'))
+    var user = $(this).attr('data')
+    $.when(getUser(user)).then(function(){
+      userObject = JSON.parse(localStorage.getItem($(this).attr('data')))
     $(this).prevAll('img').attr('src', userObject.picture.thumbnail)
     $(this).prevAll('.name')
     .text(userObject.name.title.toUpperCase()+
@@ -13,11 +29,12 @@ $(document).ready(function(){
 
   });
 });
-function getUser(){
+//AJAX request for new user
+function getUser(user){
   return  $.get("https://randomuser.me/api/", function(data){
     result = data.results[0].user;
     console.log(result);
     var store = JSON.stringify(result)
-    localStorage.setItem('user', store)
+    localStorage.setItem(user, store)
   });
 }

@@ -1,4 +1,4 @@
-img{
+.plyr-img{
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -11,7 +11,8 @@ img{
   background-color: rgb(255, 0, 0);
   justify-content: space-around;
   align-items: center;
-  width: 25%
+  width: 25%;
+  border-radius: 10px;
 }
 main{
   display: flex;
@@ -20,8 +21,17 @@ main{
 }
 header{
   display: flex;
-  background-color: black;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: red;
   height: 4vw;
+}
+#links{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 110.5px
 }
 body{
   margin: 0;
@@ -32,4 +42,8 @@ body{
 }
 .active{
   background-color: green;
+}
+.btn-group{
+  margin-left: 3px;
+  margin-right: 3px;
 }

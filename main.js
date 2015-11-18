@@ -435,6 +435,7 @@ function ballMovement(cell, figure){
     blackscore += 1;
     turnCount = 0;
     turn = 'white';
+    $('.player').toggleClass('active')
     resetBoard();
   }
   //if white scores
@@ -442,6 +443,7 @@ function ballMovement(cell, figure){
     whitescore += 1;
     turn = 'black';
     turnCount = 0;
+    $('.player').toggleClass('active')
     resetBoard();
   }
   figure.selected = false

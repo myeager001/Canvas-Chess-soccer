@@ -13,37 +13,79 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
-
-
-
 </head>
 <body>
   <header>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Create Player
+      </button>
+      <ul class="dropdown-menu">
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Full Name">
+          </div>
+          <div class="form-group">
+            <label for="username">User Name</label>
+            <input type="text" class="form-control" id="username" placeholder="User Name">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputFile">File input</label>
+            <input type="file" id="imgInp">
+            <p class="help-block">Player Image</p>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="radio" name="color" value="white" checked> Play as White
+              <br>
+              <input type="radio" name="color" value="black"> Play as Black
+            </label>
+          </div>
+          <button type="submit" class="btn btn-default sbmt-plyr">Submit</button>
+        </form>
+      </ul>
+    </div>
+      <img src="images/logo.png" alt="logo" />
 
+<div class="btn-group" id="links">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right">
+    <li><button type="button" class="reset">Reset Game</button></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
   </header>
   <main>
   <div class="player">
     <h1>Black</h1>
     <h2 id="black-score">Score: 0</h2>
-    <img class="player1"></img>
+    <img class="player1 plyr-img" id="player1"></img>
     <h1 class="name"></h1>
     <h2 class="username"></h2>
-    <button type="button" class="get-player">Get A Player</button>
+    <button type="button" class="get-player" id="userone" data="userone">Get A Player</button>
   </div>
   <div class="canvas-wraper">
   <canvas width='680' height="830" id="canvas"></canvas>
   <button type="button" class="reset">Reset Game</button>
+
   </div>
   <div class="player active">
     <h1>White</h2>
     <h2 id="white-score">Score: 0</h2>
-    <img class="player2"></img>
+    <img class="player2 plyr-img" id="player2"></img>
     <h1 class="name"></h1>
     <h2 class="username"></h2>
-    <button type="button" class="get-player">Get A Player</button>
+    <button type="button" class="get-player" id="usertwo" data="usertwo">Get A Player</button>
   </div>
 </main>
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="api.js"></script>
+  <script type="text/javascript" src="nav.js"></script>
 </body>
 </html>
