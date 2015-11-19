@@ -55,14 +55,14 @@ function drawBoard() {
       else if(i === 1 || i === 2 || i === 8 || i === 9 ){
         for(var j=0; j<9; j++){
           if(j>2 && j <6){
-            colorSquare(i,j,"blue")
+            colorSquare(i,j,"rgb(147,255,88)")
           }else {
-          colorSquare(i,j,"white")
+          colorSquare(i,j,"rgb(184,255,138)")
           }
         }
       }else{
           for(var j=0; j<9; j++){
-            colorSquare(i,j,"white")
+            colorSquare(i,j,"rgb(184,255,138)")
           }
         }
       }

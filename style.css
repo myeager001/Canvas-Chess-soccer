@@ -1,3 +1,6 @@
+body{
+    background-color: rgb(42,42,42);
+}
 .plyr-img{
   width: 150px;
   height: 150px;
@@ -8,24 +11,26 @@
 .player{
   display: flex;
   flex-direction: column;
-  background-color: rgb(255, 0, 0);
+  background-color: rgb(230, 232, 230);
   justify-content: space-around;
   align-items: center;
   width: 25%;
   border-radius: 10px;
-  margin: 0 10px;
+  margin:  10px;
+  height: 50%
 }
 main{
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 header{
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: center;
-  background-color: red;
+  background-color: rgb(230,232,230);
   height: 4vw;
   margin-bottom: 5px;
 }
@@ -43,7 +48,7 @@ body{
   flex-direction: column;
 }
 .active{
-  background-color: green;
+  background-color: rgb(232,111,52);
 }
 .btn-group{
   margin-left: 3px;
@@ -70,4 +75,15 @@ li  {
   display: flex;
   flex-direction: row;
   justify-content: left;
+}
+article > *{
+  color: white;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+article > p{
+  margin-left: 60px;
+}
+.get-player{
+  margin-bottom: 8px;
 }

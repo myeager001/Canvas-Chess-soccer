@@ -7,11 +7,14 @@ function loadUser(user){
   var button = document.getElementById(user)
   $(button).prevAll('img').attr('src', result.picture.thumbnail)
   $(button).prevAll('.name')
-  .text(result.name.title.toUpperCase()+
-  " "+result.name.first.toUpperCase()+
-  " "+result.name.last.toUpperCase());
+  .text(capFirstLetter(result.name.title)+
+  " "+capFirstLetter(result.name.first)+
+  " "+capFirstLetter(result.name.last));
   $(button).prevAll('.username').text(result.username)
 
+}
+function capFirstLetter(string){
+   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 //button response to getting a new player
@@ -21,9 +24,9 @@ function loadUser(user){
       userObject = JSON.parse(localStorage.getItem($(this).attr('data')))
     $(this).prevAll('img').attr('src', userObject.picture.thumbnail)
     $(this).prevAll('.name')
-    .text(userObject.name.title.toUpperCase()+
-    " "+userObject.name.first.toUpperCase()+
-    " "+userObject.name.last.toUpperCase());
+    .text(capFirstLetter(userObject.name.title)+
+    " "+capFirstLetter(userObject.name.first)+
+    " "+capFirstLetter(userObject.name.last));
     $(this).prevAll('.username').text(userObject.username)
   }.bind(this));
 
