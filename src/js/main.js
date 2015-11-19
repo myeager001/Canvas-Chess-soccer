@@ -25,9 +25,9 @@ var strikerTwoBlack = new figure("king", "black", 3, 3);
 var strikerThreeWhite = new figure("king", "white", 4, 7);
 var strikerThreeBlack = new figure("king", "black", 4, 3);
 var gameObjects = [whiteKeeper , blackKeeper, strikerOneWhite, strikerOneBlack, strikerTwoWhite, strikerTwoBlack, strikerThreeWhite, strikerThreeBlack]
-var boardSizex = 679;
-var boardSizey = 835;
-var boardStep = 75;
+var boardSizex = 580;
+var boardSizey = 710;
+var boardStep = 64;
 var whitescore = 0;
 var blackscore = 0;
 
