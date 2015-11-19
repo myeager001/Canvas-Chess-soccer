@@ -1,6 +1,6 @@
 {
   "firebase": "popping-heat-8936",
-  "public": ".",
+  "public": "build",
   "ignore": [
     "firebase.json",
     "**/.*",
