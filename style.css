@@ -26,6 +26,7 @@ header{
   align-items: center;
   background-color: red;
   height: 4vw;
+  margin-bottom: 5px;
 }
 #links{
   display: flex;
@@ -46,4 +47,13 @@ body{
 .btn-group{
   margin-left: 3px;
   margin-right: 3px;
+}
+li  {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-btn{
+  width: 95px;
+  margin: 3px;
 }

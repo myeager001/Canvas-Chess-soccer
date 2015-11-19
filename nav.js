@@ -27,4 +27,11 @@ $(document).ready(function(){
     }
 
   })
+  $('.save').on('click', function(){
+    var saveName = prompt('Name Game to Save')
+  })
+
+  $('.load').on('click', function(){
+    var loadGame = prompt('Name of Game')
+  })
 })
