@@ -4,6 +4,7 @@ $(document).ready(function(){
 $('.reset').on('click',function(){
   resetBoard();
   selection = false
+  kickCount = 3
   turnCount = 3;
   turn = 'white';
   whitescore = 0;
@@ -445,19 +446,19 @@ function ballMovement(cell, figure){
   //if black scores
   if(ball.row === 10){
     blackscore += 1;
-    turnCount = 3;
-    kickCount = 3;
-    turn = 'white';
+    if(turn === "black"){
     $('.player').toggleClass('active')
+    }
+    turn = 'white';
     resetBoard();
   }
   //if white scores
   if(ball.row === 0){
     whitescore += 1;
-    turn = 'black';
-    turnCount = 3;
-    kickCount = 3;
+    if(turn === "white"){
     $('.player').toggleClass('active')
+    }
+    turn = 'black';
     resetBoard();
   }
   figure.selected = false
@@ -467,10 +468,44 @@ function ballMovement(cell, figure){
   return
 }
 function resetBoard(){
+  turnCount = 3;
+  kickCount = 3;
   for(var i = 0; i < gameObjects.length; i++){
     gameObjects[i].row = gameObjects[i].startRow;
     gameObjects[i].column = gameObjects[i].startColumn;
   }
     ball.row = ball.startRow;
     ball.column = ball.startColumn;
+}
+
+function saveGame(name){
+  var storage = [];
+  storage.push(gameObjects);
+  storage.push(ball);
+  storage.push(turnCount)
+  storage.push(kickCount)
+  storage.push(whitescore)
+  storage.push(blackscore)
+  storage.push(turn)
+  console.log(storage)
+  localStorage.setItem(name, JSON.stringify(storage))
+}
+
+function loadGame(name){
+  var load = JSON.parse(localStorage.getItem(name));
+  console.log(load)
+  turn = load.pop();
+  blackscore = load.pop();
+  whitescore = load.pop();
+  kickCount = load.pop();
+  turnCount = load.pop();
+  var ballObject = load.pop();
+  ball.row = ballObject.row;
+  ball.column = ballObject.column;
+  var gameObjectsFromStorage = load.pop();
+  for(var i = 0; i <gameObjectsFromStorage.length; i++){
+    gameObjects[i].row = gameObjectsFromStorage[i].row
+    gameObjects[i].column = gameObjectsFromStorage[i].column
+  }
+  drawBoard();
 }

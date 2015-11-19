@@ -16,11 +16,13 @@
 </head>
 <body>
   <header>
+      <img src="images/logo.png" class="logo" alt="logo" />
+      <div class="nav-group">
     <div class="btn-group">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Create Player
       </button>
-      <ul class="dropdown-menu">
+      <ul class="dropdown-menu dropdown-menu-right">
         <form>
           <div class="form-group">
             <label for="name">Name</label>
@@ -46,19 +48,18 @@
         </form>
       </ul>
     </div>
-      <img src="images/logo.png" alt="logo" />
-
 <div class="btn-group" id="links">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
   </button>
   <ul class="dropdown-menu dropdown-menu-right">
-    <li><button type="button" class="reset nav-btn">Reset Game</button></li>
-    <li><button type="button" class="save nav-btn">Save Game</button></li>
-    <li><button type="button" class="load nav-btn">load game</button></li>
+    <li><a href="#" class="reset nav-btn">Reset Game</a></li>
+    <li><a href="#" class="save nav-btn">Save Game</a></li>
+    <li><a href="#" class="load nav-btn">Load Game</a></li>
     <li role="separator" class="divider"></li>
-    <li><a href="#">Rules</a></li>
+    <li><a href="rules.html">Rules</a></li>
   </ul>
+</div>
 </div>
   </header>
   <main>
@@ -72,7 +73,6 @@
   </div>
   <div class="canvas-wraper">
   <canvas width='676' height="830" id="canvas"></canvas>
-  <button type="button" class="reset">Reset Game</button>
 
   </div>
   <div class="player active">
