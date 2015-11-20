@@ -5,9 +5,10 @@ var uglify = require('gulp-uglify')
 gulp.task('default', ['minify', 'copyHtml', 'copyCss', 'copyImages']);
 
 gulp.task('minify', function(){
-  return gulp.src('./src/**/*.js')
+  return gulp.src(['./src/js/game.js','./src/js/api.js', './src/js/nav.js' ])
   .pipe(concat('main.js'))
-  .pipe(uglify()).pipe(gulp.dest('./build'))
+  .pipe(gulp.dest('./src/js'))
+  .pipe(uglify()).pipe(gulp.dest('./build/js'))
 });
 
 gulp.task('copyHtml', function(){

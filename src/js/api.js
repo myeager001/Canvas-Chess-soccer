@@ -1,7 +1,11 @@
 $(document).ready(function(){
 //load users from local storage
-loadUser('userone');
-loadUser('usertwo')
+if (localStorage.getItem('userone')){
+  loadUser('userone');
+  }
+if (localStorage.getItem('usertwo')){
+  loadUser('usertwo')
+  }
 function loadUser(user){
   var result = JSON. parse(localStorage.getItem(user))
   var button = document.getElementById(user)

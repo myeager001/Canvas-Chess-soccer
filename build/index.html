@@ -3,89 +3,85 @@
 <head>
   <meta charset="utf-8">
   <title>Chessboard Soccer</title>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
   <header>
-      <img src="images/logo.png" class="logo" alt="logo" />
-      <div class="nav-group">
-    <div class="btn-group">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <img src="images/logo.png" class="logo" alt="logo" />
+    <navbar class="nav-group">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Create Player
-      </button>
-      <ul class="dropdown-menu dropdown-menu-right">
-        <form>
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Full Name">
-          </div>
-          <div class="form-group">
-            <label for="username">User Name</label>
-            <input type="text" class="form-control" id="username" placeholder="User Name">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" id="imgInp">
-            <p class="help-block">Player Image</p>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="radio" name="color" value="white" checked> Play as White
-              <br>
-              <input type="radio" name="color" value="black"> Play as Black
-            </label>
-          </div>
-          <button type="submit" class="btn btn-default sbmt-plyr">Submit</button>
-        </form>
-      </ul>
-    </div>
-<div class="btn-group" id="links">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-  </button>
-  <ul class="dropdown-menu dropdown-menu-right">
-    <li><a href="#" class="reset nav-btn">Reset Game</a></li>
-    <li><a href="#" class="save nav-btn">Save Game</a></li>
-    <li><a href="#" class="load nav-btn">Load Game</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="rules.html">Rules</a></li>
-  </ul>
-</div>
-</div>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Full Name">
+            </div>
+            <div class="form-group">
+              <label for="username">User Name</label>
+              <input type="text" class="form-control" id="username" placeholder="User Name">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile">File input</label>
+              <input type="file" id="imgInp">
+              <p class="help-block">Player Image</p>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="radio" name="color" value="white" checked> Play as White
+                <br>
+                <input type="radio" name="color" value="black"> Play as Black
+              </label>
+            </div>
+            <button type="submit" class="btn btn-default sbmt-plyr">Submit</button>
+          </form>
+        </ul>
+      </div>
+      <div class="btn-group" id="links">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a href="#" class="reset nav-btn">Reset Game</a></li>
+          <li><a href="#" class="save nav-btn">Save Game</a></li>
+          <li><a href="#" class="load nav-btn">Load Game</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+    </navbar>
   </header>
   <main>
-  <div class="player">
-    <h1>Black</h1>
-    <h2 id="black-score">Score: 0</h2>
-    <img class="player1 plyr-img" id="player1"></img>
-    <h2 class="name"></h2>
-    <h2 class="username"></h2>
-    <button type="button" class="get-player" id="userone" data="userone">Get A Player</button>
-  </div>
-  <div class="canvas-wraper">
-  <canvas width='577' height="705" id="canvas"></canvas>
-
-  </div>
-  <div class="player active">
-    <h1>White</h2>
-    <h2 id="white-score">Score: 0</h2>
-    <img class="player2 plyr-img" id="player2"></img>
-    <h2 class="name"></h2>
-    <h2 class="username"></h2>
-    <button type="button" class="get-player" id="usertwo" data="usertwo">Get A Player</button>
-  </div>
-</main>
+    <div class="player">
+      <h1>Black</h1>
+      <h2 id="black-score">Score: 0</h2>
+      <img class="player1 plyr-img" id="player1"></img>
+      <h2 class="name"></h2>
+      <h2 class="username"></h2>
+      <button type="button" class="get-player" id="userone" data="userone">Get A Player</button>
+    </div>
+    <canvas width='577' height="705" id="canvas"></canvas>
+    <div class="player active">
+        <h1>White</h2>
+        <h2 id="white-score">Score: 0</h2>
+        <img class="player2 plyr-img" id="player2"></img>
+        <h2 class="name"></h2>
+        <h2 class="username"></h2>
+        <button type="button" class="get-player" id="usertwo" data="usertwo">Get A Player</button>
+    </div>
+  </main>
   <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript" src="js/api.js"></script>
-  <script type="text/javascript" src="js/nav.js"></script>
+
 </body>
 </html>
