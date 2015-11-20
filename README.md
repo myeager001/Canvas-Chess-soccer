@@ -7,3 +7,6 @@ What is chess-soccer?
 Using the file 
   to  change the project fork and clone the repo install node and gulp with the dependencies found in the gulp file.
   game.js contains the canvas and game logic. gulp builds them together with main.js
+  
+Check out demo
+  https://youtu.be/vjLVp-tKu4Y
